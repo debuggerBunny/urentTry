@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Listado de Arrendatario</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+	<div class="container">
+		<br>
+		<div>
+			<a href="/Arrendatario/save/0" class="btn btn-primary">Agregar</a>
+		</div>
+		<div th:switch="${list}">
+			<h2 th:case="null">No hay Arrendatario</h2>
+			<div th:case="*">
+				<h2>Arrendatario</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Rut</th>
+							<th>Nombre</th>
+							<th>Telefono</th>
+							<th>Correo</th>
+							<th>Calificacion</th>
+							<th>Estado</th>			
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="Arrendatario : ${list}">
+							<td th:text="${Arrendatario.id_Arrendatario}">
+							<td th:text="${Arrendatario.nombre}">
+							<td th:text="${Arrendatario.telefono}">
+							<td th:text="${Arrendatario.correo}">
+							<td th:text="${Arrendatario.calificacion}">
+							<td th:text="${Arrendatario.estado}">
+							
+							<td><a th:href="@{/Arrendatario/save/{id}(id=${Arrendatario.id_Arrendatario})}">Editar</a></td>
+							<td><a th:href="@{/Arrendatario/delete/{id}(id=${Arrendatario.id_Arrendatario})}">Eliminar</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
