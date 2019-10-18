@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listado de Arrendadores</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+	<div class ="container">
+		<form action="#" th:action="@{/Arrendador/update/{id}(id=${Arrendador.id_Arrendador})}" class="form-group" th:object=${Arrendador} method="post">
+			
+				<div class="form-group">
+				<label for="nombre">Id</label>
+				<input type="text" class="form.control" id="id_Arrendador" th:field="*{id_Arrendador}" name="id_Arrendador">		
+				</div>
+			
+			<div class="form-group">
+				<label for="nombre">Nombre</label>
+				<input type="text" class="form.control" id="nombre" th:field="*{nombre}" name="nombre">		
+			</div>
+			
+			<div class="form-group">
+				<label for="nombre">Rut</label>
+				<input type="text" class="form.control" id="rut_Arrendador" th:field="*{rut_Arrendador}" name="rut_Arrendador">		
+			</div>
+			
+			<div class="form-group">
+				<label for="nombre">Telefono</label>
+				<input type="text" class="form.control" id="telefono" th:field="*{telefono}" name="telefono">		
+			</div>
+			
+			<div class="form-group">
+				<label for="nombre">correo</label>
+				<input type="text" class="form.control" id="correo" th:field="*{correo}" name="correo">		
+			</div>
+			<button type="submit" class=" btn btn-success">Guardar</button>
+		</form>
+	</div>
+
+</body>
+</html>

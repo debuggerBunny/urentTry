@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<style>
+#customers {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+#customers tr:hover {
+	background-color: #ddd;
+}
+#customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #25d9af;
+	color: white;
+}
+#customers a {
+	color: black;
+}
+h2 {
+	text-align: center;
+}
+</style>
+<title>Listado de Arriendos</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/Map-Clean.css">
+<link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+<head th:replace="header :: head">
 </head>
 <body>
+	<div class="container">
+	<header th:replace="header :: header"></header>
+		<br>
+		<div>
+			<br> <br> <br> <br>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a
+						onclick="location.href='/indexArrendador'"><span>Inicio</span></a></li>
+					<li class="breadcrumb-item active"><span>Arriendos</span></li>
+				</ol>
+			</nav>
+		</div>
 
+		<h2 th:if="${list.isEmpty()}"> No hay Arriendos <a href="/Arrendador/save/0"
+				class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</a>
+		</h2>
+		
+		<div th:if="${!list.isEmpty()}">
+			<h2>
+				Arriendos <a href="/Arrendador/save/0" class="btn btn-primary"><i
+					class="fa fa-user-plus"></i> Agregar</a>
+			</h2>
+			<table id="customers">
+				<tr>
+					<th>Id</th>
+					<th>Fecha de Inicio</th>
+					<th>Fecha de Termino</th>
+					<th>id Arrendador</th>
+					<th>id Arrendatario</th>
+					<th>id Inmueble</th>
+					<th>Estado</th>	
+					<th></th>
+					<th></th>
+				</tr>
+				
+				<tr th:each="Arriendo : ${list}">
+							<td th:text="${Arriendo.id_Arriendo}">
+							<td th:text="${Arriendo.fecha_Inicio}">
+							<td th:text="${Arriendo.fecha_Termino}">
+							<td th:text="${Arriendo.arrendador.id_Arrendador}">
+							<td th:text="${Arriendo.arrendatario.id_Arrendatario}">
+							<td th:text="${Arriendo.inmueble.id_Inmueble}">
+							<td th:text="${Arriendo.estado}">
+					
+					
+					<td><a th:href="@{/Arriendo/save/{id}(id=${Arriendo.id_Arriendo})}">Editar <i class="fa fa-edit"></i></a></td>
+					<td><a th:href="@{/Arriendo/delete/{id}(id=${Arriendo.id_Arriendo})}">Eliminar <i class="fa fa-trash"></i></a></td>
+				</tr>
+			</table>
+		</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	</div>
+	<footer th:replace="footer :: footer"></footer>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/untitled.js"></script>
 </body>
 </html>

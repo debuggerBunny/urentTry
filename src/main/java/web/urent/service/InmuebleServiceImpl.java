@@ -15,7 +15,7 @@ public class InmuebleServiceImpl implements InmuebleService {
 
 	@Override
 	public List<Inmueble> getAll() {
-		return inmuebleRepositorio.findAll();
+		return inmuebleRepositorio.listar();
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class InmuebleServiceImpl implements InmuebleService {
 	@Override
 	public void delete(int id) {
 		Inmueble inm = inmuebleRepositorio.getOne(id);
-		inm.setEstado((byte)(0));
+		inm.setEstado(0);
 		inmuebleRepositorio.save(inm);
 		
 	}

@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>CACA title here</title>
+<meta charset="UTF-8">
+<title>Listado de Universidades</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
 </head>
 <body>
-
+	<div class="container">
+		<br>
+		<div>
+			<a href="/Universidad/save/0" class="btn btn-primary">Agregar</a>
+		</div>
+		<div th:switch="${list}">
+			<h2 th:case="null">No hay Universidades</h2>
+			<div th:case="*">
+				<h2>Universidades</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Estado</th>
+	
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="Universidad : ${list}">
+							<td th:text="${Universidad.id_Universidad}">
+							<td th:text="${Universidad.nombre}">
+							<td th:text="${Universidad.estado}">
+							
+							<td><a th:href="@{/Universidad/save/{id}(id=${Universidad.id_Universidad})}">Editar</a></td>
+							<td><a th:href="@{/Universidad/delete/{id}(id=${Universidad.id_Universidad})}">Eliminar</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

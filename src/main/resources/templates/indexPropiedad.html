@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Listado de Propiedades</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
 </head>
 <body>
+	<div class="container">
+		<br>
+		<div>
+			<a href="/Arriendo/save/0" class="btn btn-primary">Agregar</a>
+		</div>
+		<div th:switch="${list}">
+			<h2 th:case="null">No hay Propiedades</h2>
+			<div th:case="*">
+				<h2>Propiedades</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Fecha de Inicio</th>
+							<th>Fecha de Termino</th>
+							<th>id Arrendador</th>
+							<th>Estado</th>			
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="Propiedad : ${list}">
+							<td th:text="${Propiedad.id_Propiedad}">
+							<td th:text="${Propiedad.fecha_Inicio}">
+							<td th:text="${Propiedad.fecha_Termino}">
+							<td th:text="${Propiedad.arrendador.id_Arrendador}">
+							<td th:text="${Propiedad.estado}">
 
+							<td><a th:href="@{/Propiedad/save/{id}(id=${Propiedad.id_Propiedad})}">Editar</a></td>
+							<td><a th:href="@{/Propiedad/delete/{id}(id=${Propiedad.id_Propiedad})}">Eliminar</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

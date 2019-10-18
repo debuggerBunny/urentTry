@@ -26,16 +26,14 @@ public class ArriendoController {
 	
 	@GetMapping("/save/{id}")
 	public String showsave(@PathVariable("id") int id, Model model) {
-		Integer id1 = Integer.valueOf(id);
-		if(id1!=null && id1 != 0) {
+		if(id!=0) {
 			model.addAttribute("Arriendo", arriendo.get(id));
-		}
-		if(id1==0) {
-			return "guardar";
+		}else {
+			model.addAttribute("Arriendo", new Arriendo());
 		}
 		return "saveArriendo";		
 	}
-	@PostMapping("/agregar")
+	@PostMapping("/save")
 	public String save(Model model, Arriendo admin) {
 		arriendo.save(admin);
 		return "redirect:/Arriendo/";

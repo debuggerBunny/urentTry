@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import web.urent.model.Arrendador;
 import web.urent.repository.ArrendadorRepository;
 
@@ -15,7 +16,7 @@ public class ArrendadorServiceImpl implements ArrendadorService{
 	private ArrendadorRepository arrendadorRepositorio;
 	@Override
 	public List<Arrendador> getAll() {	
-		return arrendadorRepositorio.findAll();
+		return arrendadorRepositorio.listar();
 	}
 
 	@Override
@@ -31,9 +32,8 @@ public class ArrendadorServiceImpl implements ArrendadorService{
 	@Override
 	public void delete(int id) {
 		Arrendador arrendador = arrendadorRepositorio.getOne(id);
-		arrendador.setEstado((byte) 0);
+		arrendador.setEstado(0);
 		arrendadorRepositorio.save(arrendador);			
 	}
-	
 
 }

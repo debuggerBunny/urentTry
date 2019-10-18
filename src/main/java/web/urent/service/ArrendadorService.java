@@ -7,7 +7,6 @@ import web.urent.model.Arrendador;
 
 public interface ArrendadorService {
 
-
 	public List<Arrendador> getAll();
 	
 	public void save(Arrendador arrendador);

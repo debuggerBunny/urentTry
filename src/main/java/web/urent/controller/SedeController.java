@@ -26,16 +26,14 @@ public class SedeController {
 	
 	@GetMapping("/save/{id}")
 	public String showsave(@PathVariable("id") int id, Model model) {
-		Integer id1 = Integer.valueOf(id);
-		if(id1!=null && id1 != 0) {
+		if(id!=0) {
 			model.addAttribute("Sede", sede.get(id));
-		}
-		if(id1==0) {
-			return "guardar";
-		}
-		return "saveSede";		
+		}else {
+			model.addAttribute("Sede", new Sede());
+		}	
+		return "/saveSede";
 	}
-	@PostMapping("/agregar")
+	@PostMapping("/Sede")
 	public String save(Model model, Sede admin) {
 		sede.save(admin);
 		return "redirect:/Sede/";

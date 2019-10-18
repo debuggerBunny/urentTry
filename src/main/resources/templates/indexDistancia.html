@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Listado de Distancias</title>
+<!-- BOOTSTRAP CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
 </head>
 <body>
-
+	<div class="container">
+		<br>
+		<div>
+			<a href="/Distancia/save/0" class="btn btn-primary">Agregar</a>
+		</div>
+		<div th:switch="${list}">
+			<h2 th:case="null">No hay Distancias</h2>
+			<div th:case="*">
+				<h2>Distancias</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Id Inmueble</th>
+							<th>Id Sede</th>
+							<th>kilometros</th>
+							<th>estado</th>		
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="Distancia : ${list}">
+							<td th:text="${Distancia.id_Distancia}">
+							<td th:text="${Distancia.inmueble.id_Inmueble}">
+							<td th:text="${Distancia.sede.id_Sede}">
+							<td th:text="${Distancia.kilometros}">
+							<td th:text="${Distancia.estado}">
+							
+							<td><a th:href="@{/Distancia/save/{id}(id=${Distancia.id_Distancia})}">Editar</a></td>
+							<td><a th:href="@{/Distancia/delete/{id}(id=${Distancia.id_Distancia})}">Eliminar</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

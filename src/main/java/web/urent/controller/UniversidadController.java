@@ -26,16 +26,14 @@ public class UniversidadController {
 	
 	@GetMapping("/save/{id}")
 	public String showsave(@PathVariable("id") int id, Model model) {
-		Integer id1 = Integer.valueOf(id);
-		if(id1!=null && id1 != 0) {
+		if(id!=0) {
 			model.addAttribute("Universidad", universidad.get(id));
-		}
-		if(id1==0) {
-			return "guardar";
+		}else {
+			model.addAttribute("Universidad", new Universidad());
 		}
 		return "saveUniversidad";		
 	}
-	@PostMapping("/agregar")
+	@PostMapping("/save")
 	public String save(Model model, Universidad admin) {
 		universidad.save(admin);
 		return "redirect:/Universidad/";

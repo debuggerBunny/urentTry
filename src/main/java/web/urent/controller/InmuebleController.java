@@ -27,16 +27,14 @@ public class InmuebleController {
 	
 	@GetMapping("/save/{id}")
 	public String showsave(@PathVariable("id") int id, Model model) {
-		Integer id1 = Integer.valueOf(id);
-		if(id1!=null && id1 != 0) {
+		if(id!=0) {
 			model.addAttribute("Inmueble", inmueble.get(id));
-		}
-		if(id1==0) {
-			return "guardar";
+		}else {
+			model.addAttribute("Inmueble", new Inmueble());
 		}
 		return "saveInmueble";		
 	}
-	@PostMapping("/agregar")
+	@PostMapping("/save")
 	public String save(Model model, Inmueble admin) {
 		inmueble.save(admin);
 		return "redirect:/Inmueble/";

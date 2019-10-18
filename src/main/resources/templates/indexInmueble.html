@@ -1,10 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<style>
+#customers {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+#customers tr:hover {
+	background-color: #ddd;
+}
+#customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #25d9af;
+	color: white;
+}
+#customers a {
+	color: black;
+}
+h2 {
+	text-align: center;
+}
+</style>
+<title>Listado de Inmuebles</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/Map-Clean.css">
+<link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+<head th:replace="header :: head">
 </head>
 <body>
+	<div class="container">
+	<header th:replace="header :: header"></header>
+		<br>
+		<div>
+			<br> <br> <br> <br>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a
+						onclick="location.href='/indexArrendador'"><span>Inicio</span></a></li>
+					<li class="breadcrumb-item active"><span>Inmuebles</span></li>
+				</ol>
+			</nav>
+		</div>
 
+		<h2 th:if="${list.isEmpty()}"> No hay Inmuebles <a href="/Arrendador/save/0"
+				class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</a>
+		</h2>
+		
+		<div th:if="${!list.isEmpty()}">
+			<h2>
+				Inmuebles <a href="/Arrendador/save/0" class="btn btn-primary"><i
+					class="fa fa-user-plus"></i> Agregar</a>
+			</h2>
+			<table id="customers">
+				<tr>
+					<th>Id</th>
+					<th>n° de Habitaciones</th>
+					<th>n° de Baños</th>
+					<th>wifi</th>
+					<th>luz</th>
+					<th>agua</th>
+					<th>gas</th>
+					<th>cocina</th>		
+					<th>precio Mensual</th>		
+					<th>descripcion</th>		
+					<th>estacionamiento</th>		
+					<th>direccion</th>		
+					<th>Arrendador</th>		
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+				
+				<tr th:each="Inmueble : ${list}">
+							<td th:text="${Inmueble.id_Inmueble}">
+							<td th:text="${Inmueble.nro_Habitaciones}">
+							<td th:text="${Inmueble.nro_Banos}">
+							<td th:text="${Inmueble.wifi}">
+							<td th:text="${Inmueble.luz}">
+							<td th:text="${Inmueble.agua}">
+							<td th:text="${Inmueble.gas}">
+							<td th:text="${Inmueble.cocina}">
+							<td th:text="${Inmueble.precio_Mensual}">
+							<td th:text="${Inmueble.descripcion}">
+							<td th:text="${Inmueble.estacionamiento}">
+							<td th:text="${Inmueble.direccion}">
+							<td th:text="${Inmueble.propiedad.arrendador.rut_Arrendador}">
+							<td><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3202.6521499418245!2d-72.12041348471544!3d-36.61068597998798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9669281ffc3c9e37%3A0x775050a9c46e8ada!2sUniversidad%20del%20B%C3%ADo-B%C3%ADo%20Campus%20La%20Castilla!5e0!3m2!1ses-419!2scl!4v1570926019556!5m2!1ses-419!2scl" width="200" height="200" frameborder="0" style="border:0;" allowfullscreen=""></iframe></td>
+							
+					<td><a th:href="@{/Inmueble/save/{id}(id=${Inmueble.id_Inmueble})}">Editar <i class="fa fa-edit"></i></a></td>
+					<td><a th:href="@{/Inmueble/delete/{id}(id=${Inmueble.id_Inmueble})}">Eliminar <i class="fa fa-trash"></i></a></td>
+					
+				</tr>
+			</table>
+		</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	</div>
+	<footer th:replace="footer :: footer"></footer>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/untitled.js"></script>
 </body>
 </html>

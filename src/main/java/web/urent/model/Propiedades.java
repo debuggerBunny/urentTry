@@ -28,7 +28,7 @@ public class Propiedades implements Serializable {
 	private Date fecha_Termino;
 
 	//bi-directional many-to-one association to Inmueble
-	@OneToMany(mappedBy="propiedades")
+	@OneToMany(mappedBy="propiedad")
 	private List<Inmueble> inmuebles;
 
 	//bi-directional many-to-one association to Arrendador
@@ -81,14 +81,14 @@ public class Propiedades implements Serializable {
 
 	public Inmueble addInmueble(Inmueble inmueble) {
 		getInmuebles().add(inmueble);
-		inmueble.setPropiedade(this);
+		inmueble.setPropiedad(this);
 
 		return inmueble;
 	}
 
 	public Inmueble removeInmueble(Inmueble inmueble) {
 		getInmuebles().remove(inmueble);
-		inmueble.setPropiedade(null);
+		inmueble.setPropiedad(null);
 
 		return inmueble;
 	}

@@ -54,7 +54,7 @@ public class Inmueble implements Serializable {
 	//bi-directional many-to-one association to Propiedades
 	@ManyToOne
 	@JoinColumn(name="id_Propiedad")
-	private Propiedades propiedades;
+	private Propiedades propiedad;
 
 	public Inmueble() {
 	}
@@ -119,8 +119,8 @@ public class Inmueble implements Serializable {
 		return this.estado;
 	}
 
-	public void setEstado(byte estado) {
-		this.estado = estado;
+	public void setEstado(int i) {
+		this.estado =(byte) i;
 	}
 
 	public int getGas() {
@@ -215,12 +215,12 @@ public class Inmueble implements Serializable {
 		return distancia;
 	}
 
-	public Propiedades getPropiedade() {
-		return this.propiedades;
+	public Propiedades getPropiedad() {
+		return this.propiedad;
 	}
 
-	public void setPropiedade(Propiedades propiedades) {
-		this.propiedades = propiedades;
+	public void setPropiedad(Propiedades propiedade) {
+		this.propiedad = propiedade;
 	}
 
 }

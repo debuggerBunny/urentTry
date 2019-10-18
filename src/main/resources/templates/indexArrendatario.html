@@ -1,50 +1,104 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Listado de Arrendatario</title>
-<!-- BOOTSTRAP CSS -->
-<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<meta charset="UTF-8">
+<style>
+#customers {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+#customers tr:hover {
+	background-color: #ddd;
+}
+#customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #25d9af;
+	color: white;
+}
+#customers a {
+	color: black;
+}
+h2 {
+	text-align: center;
+}
+</style>
+<title>Listado de Arrendatarios</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/Map-Clean.css">
+<link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+<head th:replace="header :: head">
 </head>
 <body>
 	<div class="container">
+	<header th:replace="header :: header"></header>
 		<br>
 		<div>
-			<a href="/Arrendatario/save/0" class="btn btn-primary">Agregar</a>
+			<br> <br> <br> <br>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a
+						onclick="location.href='/indexArrendador'"><span>Inicio</span></a></li>
+					<li class="breadcrumb-item active"><span>Arrendatarios</span></li>
+				</ol>
+			</nav>
 		</div>
-		<div th:switch="${list}">
-			<h2 th:case="null">No hay Arrendatario</h2>
-			<div th:case="*">
-				<h2>Arrendatario</h2>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Rut</th>
-							<th>Nombre</th>
-							<th>Telefono</th>
-							<th>Correo</th>
-							<th>Calificacion</th>
-							<th>Estado</th>			
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="Arrendatario : ${list}">
+
+		<h2 th:if="${list.isEmpty()}"> No hay Arrendatarios <a href="/Arrendador/save/0"
+				class="btn btn-primary"><i class="fa fa-user-plus"></i> Agregar</a>
+		</h2>
+		
+		<div th:if="${!list.isEmpty()}">
+			<h2>
+				Arrendatarios <a href="/Arrendador/save/0" class="btn btn-primary"><i
+					class="fa fa-user-plus"></i> Agregar</a>
+			</h2>
+			<table id="customers">
+				<tr>
+					<th>Id</th>
+					<th>Rut</th>
+					<th>Nombre</th>
+					<th>Telefono</th>
+					<th>Correo</th>
+					<th>Calificacion</th>
+					<th>Estado</th>			
+					<th></th>
+					<th></th>
+				</tr>
+				
+				<tr th:each="Arrendatario : ${list}">
 							<td th:text="${Arrendatario.id_Arrendatario}">
+							<td th:text="${Arrendatario.rut_Arrendatario}">
 							<td th:text="${Arrendatario.nombre}">
 							<td th:text="${Arrendatario.telefono}">
 							<td th:text="${Arrendatario.correo}">
 							<td th:text="${Arrendatario.calificacion}">
 							<td th:text="${Arrendatario.estado}">
-							
-							<td><a th:href="@{/Arrendatario/save/{id}(id=${Arrendatario.id_Arrendatario})}">Editar</a></td>
-							<td><a th:href="@{/Arrendatario/delete/{id}(id=${Arrendatario.id_Arrendatario})}">Eliminar</a></td>
-							
-						</tr>
-					</tbody>
-				</table>
-			</div>
+										
+					<td><a th:href="@{/Arrendatario/save/{id}(id=${Arrendatario.id_Arrendatario})}">Editar <i class="fa fa-edit"></i></a></td>
+					<td><a th:href="@{/Arrendatario/delete/{id}(id=${Arrendatario.id_Arrendatario})}">Eliminar <i class="fa fa-trash"></i></a></td>
+				</tr>
+			</table>
 		</div>
+	<br>
+	<br>
+	<br>
+	<br>
 	</div>
+	<footer th:replace="footer :: footer"></footer>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/untitled.js"></script>
 </body>
 </html>

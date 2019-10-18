@@ -28,15 +28,15 @@ public class ArrendatarioController {
 	public String showsave(@PathVariable("id") int id, Model model) {
 		if(id!=0) {
 			model.addAttribute("Arrendatario", arrendatario.get(id));
-		}else{
-			return "guardar";
+		}else {
+			model.addAttribute("Arrendatario", new Arrendatario());
 		}
 		return "saveArrendatario";		
 	}
-	@PostMapping("/agregar")
-	public String save(Model model, Arrendatario admin) {
-		arrendatario.save(admin);
-		return "redirect:/Arriendo/";
+	@PostMapping("/save")
+	public String save(Model model, Arrendatario arren) {
+		arrendatario.save(arren);
+		return "redirect:/Arrendatario/";
 	}
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable int id, Model model) {
